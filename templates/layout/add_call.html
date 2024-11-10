@@ -1,0 +1,225 @@
+{{ template "base" . }}
+
+<body>
+
+{{ template "navbar" . }}
+
+
+<!-- Layout container -->
+<div class="layout-page">
+  <!-- Content wrapper -->
+  <div class="content-wrapper">
+    <!-- Menu -->
+    <aside id="layout-menu" class="layout-menu-horizontal menu-horizontal menu bg-menu-theme flex-grow-0">
+      <div class="container-xxl d-flex h-100">
+        <ul class="menu-inner py-1">
+          <!-- Page -->
+          <li class="menu-item">
+            <a href="index.html" class="menu-link">
+              <i class="menu-icon tf-icons ti ti-smart-home"></i>
+              <div data-i18n="Ana Sayfa">Ana Sayfa</div>
+            </a>
+          </li>
+          <li class="menu-item active">
+            <a href="add_call.html" class="menu-link">
+              <i class="menu-icon tf-icons ti ti-app-window"></i>
+              <div data-i18n="Çağrı Ekle">Çağrı Ekle</div>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+    <!-- / Menu -->
+
+    <!-- Content -->
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+      <h4 class="py-3 mb-0">
+        <span class="text-muted fw-light">Urga /</span><span class="fw-medium"> Zafiyet Ekle</span>
+      </h4>
+
+      <div class="app-ecommerce">
+        <!-- Add Product -->
+        <div
+                class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3">
+          <div class="d-flex flex-column justify-content-center">
+            <h4 class="mb-1 mt-3">Yeni Zafiyet Ekle</h4>
+            <p class="text-muted">Uygulama'ya yeni zafiyet eklenecektir.</p>
+          </div>
+          <div class="d-flex align-content-center flex-wrap gap-3">
+            <div class="d-flex gap-3">
+              <button class="btn btn-label-secondary">Vazgeç</button>
+              <button class="btn btn-label-primary">Şablonu Kaydet</button>
+            </div>
+            <button type="submit" class="btn btn-primary">Zafiyeti Kaydet</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- First column-->
+          <div class="col-12 col-lg-8">
+            <!-- Product Information -->
+            <div class="card mb-4">
+              <div class="card-header">
+                <h5 class="card-tile mb-0">Zafiyet information</h5>
+              </div>
+              <div class="card-body">
+                <div class="mb-3">
+                  <label class="form-label" for="ecommerce-product-name">Zafiyet Adı</label>
+                  <input
+                          type="text"
+                          class="form-control"
+                          id="ecommerce-product-name"
+                          placeholder="Product title"
+                          name="productTitle"
+                          aria-label="Vuln title" />
+                </div>
+                <div class="row mb-3">
+                  <div class="mb-3 col ecommerce-select2-dropdown">
+                    <label
+                            class="form-label mb-1 d-flex justify-content-between align-items-center"
+                            for="category-org">
+                      <span>Uygulama Adı</span>
+                    </label>
+                    <select id="domain" class="select2 form-select" data-placeholder="Select Domain">
+                      <option value="Household">diasteknoloji.com</option>
+                      <option value="Household">gsm2.com</option>
+                    </select>
+                  </div>
+                  <div class="col">
+                    <label class="form-label" for="ecommerce-product-barcode">URL adresi</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="ecommerce-product-barcode"
+                            placeholder="0123-4567"
+                            name="productBarcode"
+                            aria-label="/users/add" />
+                  </div>
+                </div>
+                <!-- Description -->
+                <div>
+                  <label class="form-label">Açıklama (POC)</label>
+                  <div class="form-control p-0 pt-1">
+                    <div class="comment-toolbar border-0 border-bottom">
+                      <div class="d-flex justify-content-start">
+                                <span class="ql-formats me-0">
+                                  <button class="ql-bold"></button>
+                                  <button class="ql-italic"></button>
+                                  <button class="ql-underline"></button>
+                                  <button class="ql-list" value="ordered"></button>
+                                  <button class="ql-list" value="bullet"></button>
+                                  <button class="ql-link"></button>
+                                  <button class="ql-image"></button>
+                                </span>
+                      </div>
+                    </div>
+                    <div class="comment-editor border-0 pb-4" id="ecommerce-category-description"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /Product Information -->
+            <!-- Media -->
+            <div class="card mb-4">
+              <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0 card-title">Medyalar</h5>
+              </div>
+              <div class="card-body">
+                <form action="/upload" class="dropzone needsclick" id="dropzone-basic">
+                  <div class="dz-message needsclick">
+                    <p class="fs-4 note needsclick pt-3 mb-1">Drag and drop your image here</p>
+                    <p class="text-muted d-block fw-normal mb-2">or</p>
+                    <span class="note needsclick btn bg-label-primary d-inline" id="btnBrowse"
+                    >Browse image</span
+                    >
+                  </div>
+                  <div class="fallback">
+                    <input name="file" type="file" />
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- /Media -->
+          </div>
+          <!-- /Second column -->
+
+          <!-- Second column -->
+          <div class="col-12 col-lg-4">
+            <!-- Organize Card -->
+            <div class="card mb-4">
+              <div class="card-header">
+                <h5 class="card-title mb-0">Şirket Bilgileri</h5>
+              </div>
+              <div class="card-body">
+                <!-- Vendor -->
+                <div class="mb-3 col ecommerce-select2-dropdown">
+                  <label class="form-label mb-1" for="vendor"> Şirket </label>
+                  <select id="vendor" class="select2 form-select" data-placeholder="Select Company">
+                    <option value="">DİAS TEKNOLOJİ</option>
+                    <option value="men-clothing">ATLASTEK</option>
+                    <option value="women-clothing">GSM2</option>
+                  </select>
+                </div>
+                <!-- Category -->
+                <div class="mb-3 col ecommerce-select2-dropdown">
+                  <label
+                          class="form-label mb-1 d-flex justify-content-between align-items-center"
+                          for="category-org">
+                    <span>Uygulama Adı</span>
+                  </label>
+                  <select id="category-org" class="select2 form-select" data-placeholder="Select Apps">
+                    <option value="">UTTS</option>
+                    <option value="Household">DBYS</option>
+                    <option value="Management">KMTS</option>
+                    <option value="Electronics">2M SARJ'</option>
+                  </select>
+                </div>
+                <!-- Collection -->
+                <div class="mb-3 col ecommerce-select2-dropdown">
+                  <label class="form-label mb-1" for="collection">Zafiyetin Uygulama Kategorisi</label>
+                  <select id="collection" class="select2 form-select" data-placeholder="Vuln Category">
+                    <option value="">Web Uygulama</option>
+                    <option value="men-clothing">Mobil Uygulama</option>
+                    <option value="women-clothing">Web Servis</option>
+                    <option value="kid-clothing">Sunucu/Kaynak</option>
+                  </select>
+                </div>
+                <!-- Status -->
+                <div class="mb-3 col ecommerce-select2-dropdown">
+                  <label class="form-label mb-1" for="status-org">Zafiyetin Seviyesi </label>
+                  <select id="status-org" class="select2 form-select" data-placeholder="Kritik/Yüksek">
+                    <option value="">Acil</option>
+                    <option value="Published">Kritik</option>
+                    <option value="Scheduled">Yüksek</option>
+                    <option value="Inactive">Orta</option>
+                    <option value="Inactive">Düşük</option>
+                    <option value="Inactive">Bilgi</option>
+                  </select>
+                </div>
+
+                
+                <!-- Tags -->
+                <div class="mb-3">
+                  <label for="ecommerce-product-tags" class="form-label mb-1">Etiketler</label>
+                  <input
+                          id="ecommerce-product-tags"
+                          class="form-control"
+                          name="ecommerce-product-tags"
+                          value="Normal,Standard,Premium"
+                          aria-label="Product Tags" />
+                </div>
+              </div>
+            </div>
+            <!-- /Organize Card -->
+          </div>
+          <!-- /Second column -->
+        </div>
+      </div>
+    </div>
+    <!--/ Content -->
+
+    <script src="/static/assets/js/app-ecommerce-product-add.js"></script>
+
+    <!--/ Content -->
+    {{ template "footer" . }}

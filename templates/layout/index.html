@@ -1,0 +1,279 @@
+{{ template "base" . }}
+
+
+<body>
+{{ template "navbar" . }}
+
+
+
+<!-- Layout container -->
+<div class="layout-page">
+  <!-- Content wrapper -->
+  <div class="content-wrapper">
+    <!-- Menu -->
+    <aside id="layout-menu" class="layout-menu-horizontal menu-horizontal menu bg-menu-theme flex-grow-0">
+      <div class="container-xxl d-flex h-100">
+        <ul class="menu-inner py-1">
+          <!-- Page -->
+          <li class="menu-item active">
+            <a href="index" class="menu-link">
+              <i class="menu-icon tf-icons ti ti-smart-home"></i>
+              <div data-i18n="Ana Sayfa">Ana Sayfa</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="add_call" class="menu-link">
+              <i class="menu-icon tf-icons ti ti-app-window"></i>
+              <div data-i18n="Çağrı Ekle">Çağrı Ekle</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="add_call" class="menu-link">
+              <i class="menu-icon tf-icons ti ti-app-window"></i>
+              <div data-i18n="Çağrı Oluştur">Çağrı Oluştur</div>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</div>
+    <!-- / Menu -->
+<!-- Content -->
+
+<div class="container-xxl flex-grow-1 container-p-y">
+  <h4 class="py-3 mb-4"><span class="text-muted fw-light">UI Elements /</span> Cards Analytics</h4>
+  <div class="row">
+
+    <!-- Support Tracker -->
+    <div class="col-md-6 mb-4 order-md-3 order-lg-0">
+      <div class="card">
+        <div class="card-header pb-0 d-flex justify-content-between">
+          <div class="card-title mb-0">
+            <h5 class="mb-0">Support Tracker</h5>
+            <small class="text-muted">Last 7 Days</small>
+          </div>
+          <div class="dropdown">
+            <button
+                    class="btn p-0"
+                    type="button"
+                    id="supportTrackerMenu"
+                    data-bs-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false">
+              <i class="ti ti-dots-vertical ti-sm text-muted"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="supportTrackerMenu">
+              <a class="dropdown-item" href="javascript:void(0);">View More</a>
+              <a class="dropdown-item" href="javascript:void(0);">Delete</a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body row">
+          <div class="col-12 col-sm-4 col-md-12 col-lg-4">
+            <div class="mt-lg-4 mt-lg-2 mb-lg-4 mb-2 pt-1">
+              <h1 class="mb-0">164</h1>
+              <p class="mb-0">Total Tickets</p>
+            </div>
+            <ul class="p-0 m-0">
+              <li class="d-flex gap-3 align-items-center mb-lg-3 pt-2 pb-1">
+                <div class="badge rounded bg-label-primary p-1"><i class="ti ti-ticket ti-sm"></i></div>
+                <div>
+                  <h6 class="mb-0 text-nowrap">New Tickets</h6>
+                  <small class="text-muted">142</small>
+                </div>
+              </li>
+              <li class="d-flex gap-3 align-items-center mb-lg-3 pb-1">
+                <div class="badge rounded bg-label-info p-1"><i class="ti ti-circle-check ti-sm"></i></div>
+                <div>
+                  <h6 class="mb-0 text-nowrap">Open Tickets</h6>
+                  <small class="text-muted">28</small>
+                </div>
+              </li>
+              <li class="d-flex gap-3 align-items-center pb-1">
+                <div class="badge rounded bg-label-warning p-1"><i class="ti ti-clock ti-sm"></i></div>
+                <div>
+                  <h6 class="mb-0 text-nowrap">Response Time</h6>
+                  <small class="text-muted">1 Day</small>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="col-12 col-sm-8 col-md-12 col-lg-8">
+            <div id="supportTracker"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-lg-5 mb-4 order-3 order-xl-0">
+      <div class="card h-100">
+        <div class="card-header">
+          <div class="card-title mb-0">
+            <h5 class="m-0">Vehicles overview</h5>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="d-none d-lg-flex vehicles-progress-labels mb-3">
+            <div class="vehicles-progress-label on-the-way-text" style="width: 39.7%">On the way</div>
+            <div class="vehicles-progress-label unloading-text" style="width: 28.3%">Unloading</div>
+            <div class="vehicles-progress-label loading-text" style="width: 17.4%">Loading</div>
+            <div class="vehicles-progress-label waiting-text text-nowrap" style="width: 14.6%">Waiting</div>
+          </div>
+          <div class="vehicles-overview-progress progress rounded-2 mb-3" style="height: 46px">
+            <div
+                    class="progress-bar fw-medium text-start bg-body text-dark px-3 rounded-0"
+                    role="progressbar"
+                    style="width: 39.7%"
+                    aria-valuenow="39.7"
+                    aria-valuemin="0"
+                    aria-valuemax="100">
+              39.7%
+            </div>
+            <div
+                    class="progress-bar fw-medium text-start bg-primary px-3"
+                    role="progressbar"
+                    style="width: 28.3%"
+                    aria-valuenow="28.3"
+                    aria-valuemin="0"
+                    aria-valuemax="100">
+              28.3%
+            </div>
+            <div
+                    class="progress-bar fw-medium text-start text-bg-info px-3"
+                    role="progressbar"
+                    style="width: 17.4%"
+                    aria-valuenow="17.4"
+                    aria-valuemin="0"
+                    aria-valuemax="100">
+              17.4%
+            </div>
+            <div
+                    class="progress-bar fw-medium text-start bg-gray-900 px-2 rounded-0 px-lg-2 px-xxl-3"
+                    role="progressbar"
+                    style="width: 14.6%"
+                    aria-valuenow="14.6"
+                    aria-valuemin="0"
+                    aria-valuemax="100">
+              14.6%
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table card-table">
+              <tbody class="table-border-bottom-0">
+              <tr>
+                <td class="w-50 ps-0">
+                  <div class="d-flex justify-content-start align-items-center">
+                    <div class="me-2">
+                      <i class="ti ti-truck mt-n1"></i>
+                    </div>
+                    <h6 class="mb-0 fw-normal">On the way</h6>
+                  </div>
+                </td>
+                <td class="text-end pe-0 text-nowrap">
+                  <h6 class="mb-0">2hr 10min</h6>
+                </td>
+                <td class="text-end pe-0">
+                  <span class="fw-medium">39.7%</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="w-50 ps-0">
+                  <div class="d-flex justify-content-start align-items-center">
+                    <div class="me-2">
+                      <i class="ti ti-circle-arrow-down mt-n1"></i>
+                    </div>
+                    <h6 class="mb-0 fw-normal">Unloading</h6>
+                  </div>
+                </td>
+                <td class="text-end pe-0 text-nowrap">
+                  <h6 class="mb-0">3hr 15min</h6>
+                </td>
+                <td class="text-end pe-0">
+                  <span class="fw-medium">28.3%</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="w-50 ps-0">
+                  <div class="d-flex justify-content-start align-items-center">
+                    <div class="me-2">
+                      <i class="ti ti-circle-arrow-up mt-n1"></i>
+                    </div>
+                    <h6 class="mb-0 fw-normal">Loading</h6>
+                  </div>
+                </td>
+                <td class="text-end pe-0 text-nowrap">
+                  <h6 class="mb-0">1hr 24min</h6>
+                </td>
+                <td class="text-end pe-0">
+                  <span class="fw-medium">17.4%</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="w-50 ps-0">
+                  <div class="d-flex justify-content-start align-items-center">
+                    <div class="me-2">
+                      <i class="ti ti-clock mt-n1"></i>
+                    </div>
+                    <h6 class="mb-0 fw-normal">Waiting</h6>
+                  </div>
+                </td>
+                <td class="text-end pe-0 text-nowrap">
+                  <h6 class="mb-0">5hr 19min</h6>
+                </td>
+                <td class="text-end pe-0">
+                  <span class="fw-medium">14.6%</span>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Carrier Performance -->
+    <div class="col-12 col-lg-7 mb-4 order-3 order-xl-0">
+      <div class="card">
+        <div class="card-header d-flex align-items-center justify-content-between">
+          <h5 class="card-title m-0 me-2">Carrier Performance</h5>
+          <div class="dropdown">
+            <button
+                    class="btn p-0"
+                    type="button"
+                    id="performance"
+                    data-bs-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false">
+              <i class="ti ti-dots-vertical"></i>
+            </button>
+            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="performance">
+              <a class="dropdown-item" href="javascript:void(0);">Delivery rate</a>
+              <a class="dropdown-item" href="javascript:void(0);">Delivery time</a>
+              <a class="dropdown-item" href="javascript:void(0);">Delivery exceptions</a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div id="carrierPerformance"></div>
+        </div>
+      </div>
+    </div>
+    <!-- Vehicles overview -->
+    <!-- Delivery Exceptions -->
+  </div>
+</div>
+<!--/ Content -->
+
+
+
+<!-- endbuild -->
+
+<!-- Vendors JS -->
+<script src="/static/assetss/vendor/libs/apex-charts/apexcharts.js"></script>
+
+<!-- Page JS -->
+<script src="/static/assetss/js/cards-analytics.js"></script>
+
+{{ template "footer" . }}
