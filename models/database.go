@@ -1,23 +1,18 @@
 package models
 
 import (
-	"database/sql"
-	_ "github.com/lib/pq" // PostgreSQL sürücüsü
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 	"log"
 )
 
-var DB *sql.DB
+var DB *gorm.DB
 
-// Veritabanı bağlantısını kur
 func ConnectDatabase() {
-	connStr := "user=diastek password=Diastek_0 dbname=urga host=localhost sslmode=disable"
-	db, err := sql.Open("postgres", connStr)
+	dsn := "user=postgres password=2231 dbname=urga host=localhost sslmode=disable"
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatal("Veritabanı bağlantı hatası:", err)
-	}
-
-	if err := db.Ping(); err != nil {
-		log.Fatal("Veritabanına erişilemiyor:", err)
 	}
 
 	log.Println("Veritabanına başarıyla bağlanıldı")

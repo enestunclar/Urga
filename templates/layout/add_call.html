@@ -4,7 +4,6 @@
 
 {{ template "navbar" . }}
 
-
 <!-- Layout container -->
 <div class="layout-page">
   <!-- Content wrapper -->
@@ -21,9 +20,9 @@
             </a>
           </li>
           <li class="menu-item active">
-            <a href="add_call.html" class="menu-link">
+            <a href="add_vulnerability.html" class="menu-link">
               <i class="menu-icon tf-icons ti ti-app-window"></i>
-              <div data-i18n="Çağrı Ekle">Çağrı Ekle</div>
+              <div data-i18n="Zafiyet Ekle">Zafiyet Ekle</div>
             </a>
           </li>
         </ul>
@@ -38,10 +37,9 @@
         <span class="text-muted fw-light">Urga /</span><span class="fw-medium"> Zafiyet Ekle</span>
       </h4>
 
-      <div class="app-ecommerce">
-        <!-- Add Product -->
-        <div
-                class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3">
+      <div class="app-cybersecurity">
+        <!-- Add Vulnerability -->
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3">
           <div class="d-flex flex-column justify-content-center">
             <h4 class="mb-1 mt-3">Yeni Zafiyet Ekle</h4>
             <p class="text-muted">Uygulama'ya yeni zafiyet eklenecektir.</p>
@@ -58,68 +56,57 @@
         <div class="row">
           <!-- First column-->
           <div class="col-12 col-lg-8">
-            <!-- Product Information -->
+            <!-- Vulnerability Information -->
             <div class="card mb-4">
               <div class="card-header">
-                <h5 class="card-tile mb-0">Zafiyet information</h5>
+                <h5 class="card-title mb-0">Zafiyet Bilgileri</h5>
               </div>
               <div class="card-body">
                 <div class="mb-3">
-                  <label class="form-label" for="ecommerce-product-name">Zafiyet Adı</label>
                   <input
                           type="text"
                           class="form-control"
-                          id="ecommerce-product-name"
-                          placeholder="Product title"
-                          name="productTitle"
-                          aria-label="Vuln title" />
+                          id="vulnerability-name"
+                          placeholder="Zafiyet başlığı"
+                          name="vulnerabilityTitle"
+                          aria-label="Zafiyet başlığı" />
                 </div>
                 <div class="row mb-3">
-                  <div class="mb-3 col ecommerce-select2-dropdown">
+                  <div class="mb-3 col cybersecurity-select2-dropdown">
                     <label
                             class="form-label mb-1 d-flex justify-content-between align-items-center"
-                            for="category-org">
+                            for="application-name">
                       <span>Uygulama Adı</span>
                     </label>
-                    <select id="domain" class="select2 form-select" data-placeholder="Select Domain">
+                    <select id="application-name" class="select2 form-select" name="applicationName" data-placeholder="Uygulama Seçin">
                       <option value="Household">diasteknoloji.com</option>
                       <option value="Household">gsm2.com</option>
                     </select>
                   </div>
                   <div class="col">
-                    <label class="form-label" for="ecommerce-product-barcode">URL adresi</label>
+                    <label class="form-label" for="vulnerability-url">URL adresi</label>
                     <input
                             type="text"
                             class="form-control"
-                            id="ecommerce-product-barcode"
+                            id="vulnerability-url"
                             placeholder="0123-4567"
-                            name="productBarcode"
+                            name="vulnerabilityUrl"
                             aria-label="/users/add" />
                   </div>
                 </div>
                 <!-- Description -->
                 <div>
                   <label class="form-label">Açıklama (POC)</label>
-                  <div class="form-control p-0 pt-1">
+                  <div class="form-control p-0 pt-1" >
                     <div class="comment-toolbar border-0 border-bottom">
-                      <div class="d-flex justify-content-start">
-                                <span class="ql-formats me-0">
-                                  <button class="ql-bold"></button>
-                                  <button class="ql-italic"></button>
-                                  <button class="ql-underline"></button>
-                                  <button class="ql-list" value="ordered"></button>
-                                  <button class="ql-list" value="bullet"></button>
-                                  <button class="ql-link"></button>
-                                  <button class="ql-image"></button>
-                                </span>
-                      </div>
+                      <div class="comment-editor border-0 pb-4" id="vulnerability-description"></div>
+
                     </div>
-                    <div class="comment-editor border-0 pb-4" id="ecommerce-category-description"></div>
                   </div>
                 </div>
               </div>
             </div>
-            <!-- /Product Information -->
+            <!-- /Vulnerability Information -->
             <!-- Media -->
             <div class="card mb-4">
               <div class="card-header d-flex justify-content-between align-items-center">
@@ -128,90 +115,95 @@
               <div class="card-body">
                 <form action="/upload" class="dropzone needsclick" id="dropzone-basic">
                   <div class="dz-message needsclick">
-                    <p class="fs-4 note needsclick pt-3 mb-1">Drag and drop your image here</p>
-                    <p class="text-muted d-block fw-normal mb-2">or</p>
-                    <span class="note needsclick btn bg-label-primary d-inline" id="btnBrowse"
-                    >Browse image</span
-                    >
+                    <p class="fs-4 note needsclick pt-3 mb-1">Resminizi buraya sürükleyin ve bırakın</p>
+                    <p class="text-muted d-block fw-normal mb-2">veya</p>
+                    <span class="note needsclick btn bg-label-primary d-inline" id="btnBrowse">Resmi Gözat</span>
                   </div>
                   <div class="fallback">
-                    <input name="file" type="file" />
+                    <input name="mediaFiles" type="file" />
                   </div>
                 </form>
               </div>
             </div>
             <!-- /Media -->
           </div>
-          <!-- /Second column -->
+          <!-- /First column -->
 
           <!-- Second column -->
           <div class="col-12 col-lg-4">
-            <!-- Organize Card -->
+            <!-- Company Information Card -->
             <div class="card mb-4">
               <div class="card-header">
                 <h5 class="card-title mb-0">Şirket Bilgileri</h5>
               </div>
               <div class="card-body">
                 <!-- Vendor -->
-                <div class="mb-3 col ecommerce-select2-dropdown">
+                <div class="mb-3 col cybersecurity-select2-dropdown">
                   <label class="form-label mb-1" for="vendor"> Şirket </label>
-                  <select id="vendor" class="select2 form-select" data-placeholder="Select Company">
+                  <select id="vendor" class="select2 form-select" name="vendor" data-placeholder="Şirket Seçin">
                     <option value="">DİAS TEKNOLOJİ</option>
                     <option value="men-clothing">ATLASTEK</option>
                     <option value="women-clothing">GSM2</option>
                   </select>
                 </div>
-                <!-- Category -->
-                <div class="mb-3 col ecommerce-select2-dropdown">
+                <!-- Application Category -->
+                <div class="mb-3 col cybersecurity-select2-dropdown">
                   <label
                           class="form-label mb-1 d-flex justify-content-between align-items-center"
-                          for="category-org">
-                    <span>Uygulama Adı</span>
+                          for="application-category">
+                    <span>Uygulama Kategorisi</span>
                   </label>
-                  <select id="category-org" class="select2 form-select" data-placeholder="Select Apps">
+                  <select id="application-category" class="select2 form-select" name="applicationCategory" data-placeholder="Uygulama Seçin">
                     <option value="">UTTS</option>
                     <option value="Household">DBYS</option>
                     <option value="Management">KMTS</option>
                     <option value="Electronics">2M SARJ'</option>
                   </select>
                 </div>
-                <!-- Collection -->
-                <div class="mb-3 col ecommerce-select2-dropdown">
-                  <label class="form-label mb-1" for="collection">Zafiyetin Uygulama Kategorisi</label>
-                  <select id="collection" class="select2 form-select" data-placeholder="Vuln Category">
+                <!-- Vulnerability Category -->
+                <div class="mb-3 col cybersecurity-select2-dropdown">
+                  <label class="form-label mb-1" for="vulnerability-category">Zafiyet Kategorisi</label>
+                  <select id="vulnerability-category" class="select2 form-select" name="vulnerabilityCategory" data-placeholder="Zafiyet Kategorisi Seçin">
                     <option value="">Web Uygulama</option>
                     <option value="men-clothing">Mobil Uygulama</option>
                     <option value="women-clothing">Web Servis</option>
                     <option value="kid-clothing">Sunucu/Kaynak</option>
                   </select>
                 </div>
-                <!-- Status -->
-                <div class="mb-3 col ecommerce-select2-dropdown">
-                  <label class="form-label mb-1" for="status-org">Zafiyetin Seviyesi </label>
-                  <select id="status-org" class="select2 form-select" data-placeholder="Kritik/Yüksek">
+                <!-- Severity Level -->
+                <div class="mb-3 col cybersecurity-select2-dropdown">
+                  <label class="form-label mb-1" for="severity-level">Zafiyet Seviyesi </label>
+                  <select id="severity-level" class="select2 form-select" name="severityLevel" data-placeholder="Kritik/Yüksek">
                     <option value="">Acil</option>
                     <option value="Published">Kritik</option>
                     <option value="Scheduled">Yüksek</option>
-                    <option value="Inactive">Orta</option>
+                    <option value="Inactive">Orta </option>
                     <option value="Inactive">Düşük</option>
                     <option value="Inactive">Bilgi</option>
                   </select>
                 </div>
 
-                
+                <!-- CVSS Skoru Girişi -->
+                <div class="mb-3">
+                  <label class="form-label" for="cvss-score">CVSS Skoru</label>
+                  <input type="number" class="form-control" id="cvss-score" name="cvssScore" placeholder="0.0" min="0" max="10" step="0.1" aria-label="CVSS Skoru" />
+                  <small class="form-text text-muted">Lütfen 0.0 ile 10.0 arasında bir değer girin. (Virgül Kullanın)</small>
+                  <div id="cvss-warning" class="text-danger" style="display: none;">Lütfen 0.0 ile 10.0 arasında bir değer girin.</div>
+                </div>
+
                 <!-- Tags -->
                 <div class="mb-3">
                   <label for="ecommerce-product-tags" class="form-label mb-1">Etiketler</label>
                   <input
                           id="ecommerce-product-tags"
                           class="form-control"
-                          name="ecommerce-product-tags"
+                          name="vulnerability-tags"
                           value="Normal,Standard,Premium"
-                          aria-label="Product Tags" />
+                          aria-label="Zafiyet Etiketleri" />
                 </div>
               </div>
             </div>
-            <!-- /Organize Card -->
+            <!-- /Company Information Card -->
           </div>
           <!-- /Second column -->
         </div>
@@ -219,7 +211,108 @@
     </div>
     <!--/ Content -->
 
-    <script src="/static/assets/js/app-ecommerce-product-add.js"></script>
+    <script>
+      document.getElementById('cvss-score').addEventListener('input', function() {
+        var value = this.value;
+        var warning = document.getElementById('cvss-warning');
+
+        // Geçersiz değer kontrolü
+        if (value === '0.0' || value === '0,0') {
+          warning.style.display = 'block'; // Uyarıyı göster
+          this.value = ''; // Geçersiz değeri temizle
+        } else if (parseFloat(value) < 0 || parseFloat(value) > 10 || isNaN(value)) {
+          warning.style.display = 'block'; // Uyarıyı göster
+          this.value = ''; // Geçersiz değeri temizle
+        } else {
+          warning.style.display = 'none'; // Uyarıyı gizle
+        }
+      });
+    </script>
+
+
+    <!-- UPLOAD FUNC & XSS CONTROL -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.4/purify.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var quill = new Quill('#vulnerability-description', {
+          modules: {
+            toolbar: {
+              container: [
+                [{ 'header': [1, 2, false] }],
+                ['bold', 'italic', 'underline'],
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                ['link', 'image']
+              ],
+              handlers: {
+                image: function () {
+                  selectLocalImage();
+                }
+              }
+            }
+          },
+          theme: 'snow'
+        });
+
+        function selectLocalImage() {
+          const input = document.createElement('input');
+          input.setAttribute('type', 'file');
+          input.setAttribute('accept', 'image/*');
+          input.click();
+
+          input.onchange = function () {
+            const file = input.files[0];
+
+            if (/^image\//.test(file.type)) {
+              saveToServer(file);
+            } else {
+              console.warn('Lütfen geçerli bir resim dosyası seçin.');
+            }
+          };
+        }
+
+        function saveToServer(file) {
+          const formData = new FormData();
+          formData.append('image', file);
+
+          fetch('/upload_image', {
+            method: 'POST',
+            body: formData
+          })
+                  .then(response => response.json())
+                  .then(data => {
+                    if (data.success) {
+                      insertPlaceholder(data.imageName);
+                    } else {
+                      console.error('Resim yüklenirken bir hata oluştu.');
+                    }
+                  })
+                  .catch(err => {
+                    console.error('Hata:', err);
+                  });
+        }
+
+        function insertPlaceholder(imageName) {
+          const range = quill.getSelection();
+          const placeholderText = `[IMG_${DOMPurify.sanitize(imageName)}]`; // XSS güvenli hale getirildi
+          quill.insertText(range.index, placeholderText);
+        }
+
+        document.getElementById("vulnerability-form").onsubmit = function() {
+          var descriptionContent = DOMPurify.sanitize(quill.root.innerHTML);
+          var descriptionInput = document.createElement('input');
+          descriptionInput.setAttribute('type', 'hidden');
+          descriptionInput.setAttribute('name', 'vulnerabilityDescription');
+          descriptionInput.setAttribute('value', descriptionContent);
+          this.appendChild(descriptionInput);
+        };
+      });
+
+
+    </script>
+
+
+    <script src="/static/assets/js/app-cybersecurity-vulnerability-add.js"></script>
 
     <!--/ Content -->
     {{ template "footer" . }}

@@ -2,24 +2,39 @@ package main
 
 import (
 	"Urga/controllers"
+	"Urga/models"
 	"log"
 	"net/http"
 )
 
 func main() {
+	// Veritabanına bağlan
+	models.ConnectDatabase()
+
+	// GORM ile veritabanı tablolarını otomatik oluşturma
+	err := models.DB.AutoMigrate(&models.VulnerabilityAdd{}, &models.VulnerabilityMedia{})
+	if err != nil {
+		log.Fatal("Migration hatası:", err)
+	}
+
 	// Statik dosyaları servis etme
 	fs := http.FileServer(http.Dir("./static"))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 
-	http.HandleFunc("/logout", controllers.Logout) // Login sayfası için bir handler ekleyin
+	// Yüklenen dosyaların servis edilmesi
+	uploads := http.FileServer(http.Dir("./uploads"))
+	http.Handle("/uploads/", http.StripPrefix("/uploads/", uploads))
 
-	// Login sayfası için route
-	http.HandleFunc("/login", controllers.LoginPage) // Login sayfası için bir handler ekleyin
+	// Yeni rotayı ekle
+	http.HandleFunc("/upload_image", controllers.UploadImage)
+
+	http.HandleFunc("/logout", controllers.Logout)
+	http.HandleFunc("/login", controllers.LoginPage)
 
 	// Ana sayfayı ve diğer rotaları koruma altına alıyoruz
-	http.HandleFunc("/", controllers.AuthMiddleware(controllers.HomePage))        // Auth middleware ile korunan rota
-	http.HandleFunc("/add_call", controllers.AuthMiddleware(controllers.AddCall)) // Auth middleware ile korunan rota
-	http.HandleFunc("/profile", controllers.AuthMiddleware(controllers.Profile))  // Auth middleware ile korunan rota
+	http.HandleFunc("/", controllers.AuthMiddleware(controllers.HomePage))
+	http.HandleFunc("/add_call", controllers.AuthMiddleware(controllers.AddCall))
+	http.HandleFunc("/profile", controllers.AuthMiddleware(controllers.Profile))
 
 	log.Println("Sunucu başlatıldı: http://localhost:8080")
 	if err := http.ListenAndServe(":8080", nil); err != nil {

@@ -2,9 +2,16 @@
 package controllers
 
 import (
+	"Urga/models"
+	"encoding/json"
 	"html/template"
+	"io"
 	"log"
 	"net/http"
+	"os"
+	"path/filepath"
+	"strconv"
+	"strings"
 )
 
 // Şablonları cache'lemek için global bir değişken
@@ -52,8 +59,69 @@ func Profile(w http.ResponseWriter, r *http.Request) {
 }
 
 func AddCall(w http.ResponseWriter, r *http.Request) {
+	// Eğer kullanıcı oturum açmamışsa
+	if !isLoggedIn(r) {
+		http.Error(w, "Oturum açılmadı. Lütfen oturum açın.", http.StatusUnauthorized)
+		http.Redirect(w, r, "/login", http.StatusSeeOther)
+
+		return
+	}
+
+	if r.Method == http.MethodPost {
+		// Kullanıcı bilgisini oturumdan alın (örneğin session id'den)
+		sessionCookie, err := r.Cookie("session_id")
+		if err != nil {
+			http.Redirect(w, r, "/login", http.StatusSeeOther)
+			return
+		}
+
+		addedBy := "Anonymous" // Eğer kullanıcı yoksa varsayılan değer
+		if sessionCookie != nil {
+			addedBy = "admin@admin.com" // Örnek kullanıcı adı
+		}
+
+		// Form verilerini al
+		title := r.FormValue("vulnerabilityTitle")
+		url := r.FormValue("vulnerabilityUrl")
+		description := r.FormValue("vulnerabilityDescription")
+		applicationName := r.FormValue("applicationName")
+		vendor := r.FormValue("vendor")
+		applicationCategory := r.FormValue("applicationCategory")
+		vulnerabilityCategory := r.FormValue("vulnerabilityCategory")
+		severityLevel := r.FormValue("severityLevel")
+		tags := r.FormValue("vulnerabilityTags")
+		cvssScore, _ := strconv.ParseFloat(r.FormValue("cvssScore"), 64)
+
+		// Yeni zafiyet oluştur
+		vulnerability := models.VulnerabilityAdd{
+			Title:                 title,
+			Url:                   url,
+			Description:           description,
+			ApplicationName:       applicationName,
+			Vendor:                vendor,
+			ApplicationCategory:   applicationCategory,
+			VulnerabilityCategory: vulnerabilityCategory,
+			SeverityLevel:         severityLevel,
+			CvssScore:             cvssScore,
+			Tags:                  tags,
+			AddedBy:               addedBy, // Ekleyen kişi bilgisi
+		}
+
+		// Veritabanına kaydet
+		result := models.DB.Create(&vulnerability)
+		if result.Error != nil {
+			http.Error(w, "Zafiyet eklenirken bir hata oluştu.", http.StatusInternalServerError)
+			return
+		}
+
+		// Başarılı ekleme sonrası yönlendirme
+		http.Redirect(w, r, "/", http.StatusSeeOther)
+		return
+	}
+
+	// Eğer GET isteği ise formu render et
 	renderTemplate(w, "add_call.html", map[string]interface{}{
-		"Title": "Add Call Page",
+		"Title": "Add Vulnerability",
 	})
 }
 
@@ -92,4 +160,56 @@ func renderTemplate(w http.ResponseWriter, tmpl string, data interface{}) {
 	} else {
 		log.Println("Şablon başarıyla render edildi:", tmpl)
 	}
+}
+
+func UploadImage(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
+		return
+	}
+
+	// Resim dosyasını al
+	file, handler, err := r.FormFile("image")
+	if err != nil {
+		http.Error(w, "Resim dosyası alınamadı.", http.StatusBadRequest)
+		return
+	}
+	defer file.Close()
+
+	// Dosya adı üzerinde XSS koruması sağlama
+	imageName := strings.ReplaceAll(handler.Filename, "<", "")
+	imageName = strings.ReplaceAll(imageName, ">", "")
+	imageName = strings.ReplaceAll(imageName, "&", "")
+	imageName = strings.ReplaceAll(imageName, "\"", "")
+	imageName = strings.ReplaceAll(imageName, "'", "")
+	imageName = strings.ReplaceAll(imageName, "/", "")
+
+	// Dosya dizinini ve adını belirleyin
+	mediaDirectory := "./uploads/images"
+	os.MkdirAll(mediaDirectory, os.ModePerm) // Eğer dizin yoksa oluştur
+	filePath := filepath.Join(mediaDirectory, imageName)
+
+	// Dosyayı belirli bir dizine kaydet
+	f, err := os.Create(filePath)
+	if err != nil {
+		http.Error(w, "Dosya oluşturulamadı.", http.StatusInternalServerError)
+		return
+	}
+	defer f.Close()
+
+	// Dosya verilerini yaz
+	_, err = io.Copy(f, file)
+	if err != nil {
+		http.Error(w, "Dosya kopyalanırken bir hata oluştu.", http.StatusInternalServerError)
+		return
+	}
+
+	// Başarıyla kaydedilen resmin adını geri döndür
+	response := map[string]string{
+		"success":   "true",
+		"imageName": imageName,
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(response)
 }
