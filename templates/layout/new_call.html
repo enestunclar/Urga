@@ -1,0 +1,87 @@
+{{ template "base" . }}
+
+<body>
+
+{{ template "navbar" . }}
+
+<!-- Layout container -->
+<div class="layout-page">
+    <!-- Content wrapper -->
+    <div class="content-wrapper">
+        <!-- Menu -->
+        <aside id="layout-menu" class="layout-menu-horizontal menu-horizontal menu bg-menu-theme flex-grow-0">
+            <div class="container-xxl d-flex h-100">
+                <ul class="menu-inner py-1">
+                    <!-- Page -->
+                    <li class="menu-item">
+                        <a href="index.html" class="menu-link">
+                            <i class="menu-icon tf-icons ti ti-smart-home"></i>
+                            <div data-i18n="Ana Sayfa">Ana Sayfa</div>
+                        </a>
+                    </li>
+                    <li class="menu-item active">
+                        <a href="add_vulnerability.html" class="menu-link">
+                            <i class="menu-icon tf-icons ti ti-app-window"></i>
+                            <div data-i18n="Zafiyet Ekle">Zafiyet Ekle</div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        <!-- / Menu -->
+
+
+        <!--/ Content -->
+
+        <!-- Content -->
+
+        <div class="container-xxl flex-grow-1 container-p-y">
+
+            <!-- Form Alignment -->
+            <div class="card">
+                <h5 class="card-header">Güvenlik Çağrısı Oluşturma</h5>
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-center h-px-500">
+                        <form class="w-px-500 border rounded p-3 p-md-5">
+                            <h3 class="mb-4">Sign In</h3>
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label" for="form-alignment-username">Username</label>
+                                <div class="col-sm-9">
+                                    <input type="text" id="form-alignment-username" class="form-control" placeholder="john.doe" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3 form-password-toggle">
+                                <label class="col-sm-3 col-form-label" for="form-alignment-password">Password</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group input-group-merge">
+                                        <input
+                                                type="password"
+                                                id="form-alignment-password"
+                                                class="form-control"
+                                                placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                                                aria-describedby="form-alignment-password2" />
+                                        <span class="input-group-text cursor-pointer" id="form-alignment-password2"
+                                        ><i class="ti ti-eye-off"></i
+                                        ></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-check m-0">
+                                    <input type="checkbox" class="form-check-input" />
+                                    <span class="form-check-label">Remember me</span>
+                                </label>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">Login</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/ Content -->
+
+
+{{ template "footer" . }}

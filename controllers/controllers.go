@@ -58,6 +58,12 @@ func Profile(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
+func NewCall(w http.ResponseWriter, r *http.Request) {
+	renderTemplate(w, "new_call.html", map[string]interface{}{
+		"Title": "Profile",
+	})
+}
+
 func AddCall(w http.ResponseWriter, r *http.Request) {
 	// Eğer kullanıcı oturum açmamışsa
 	if !isLoggedIn(r) {

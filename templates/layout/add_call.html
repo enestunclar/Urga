@@ -31,7 +31,6 @@
     <!-- / Menu -->
 
     <!-- Content -->
-
     <div class="container-xxl flex-grow-1 container-p-y">
       <h4 class="py-3 mb-0">
         <span class="text-muted fw-light">Urga /</span><span class="fw-medium"> Zafiyet Ekle</span>
@@ -49,7 +48,10 @@
               <button class="btn btn-label-secondary">Vazgeç</button>
               <button class="btn btn-label-primary">Şablonu Kaydet</button>
             </div>
-            <button type="submit" class="btn btn-primary">Zafiyeti Kaydet</button>
+            <!-- Zafiyeti Kaydet Butonu için Form -->
+            <form action="/add_call" method="POST" id="vulnerability-form">
+              <button type="submit" class="btn btn-primary">Zafiyeti Kaydet</button>
+            </form>
           </div>
         </div>
 
@@ -62,48 +64,49 @@
                 <h5 class="card-title mb-0">Zafiyet Bilgileri</h5>
               </div>
               <div class="card-body">
-                <div class="mb-3">
-                  <input
-                          type="text"
-                          class="form-control"
-                          id="vulnerability-name"
-                          placeholder="Zafiyet başlığı"
-                          name="vulnerabilityTitle"
-                          aria-label="Zafiyet başlığı" />
-                </div>
-                <div class="row mb-3">
-                  <div class="mb-3 col cybersecurity-select2-dropdown">
-                    <label
-                            class="form-label mb-1 d-flex justify-content-between align-items-center"
-                            for="application-name">
-                      <span>Uygulama Adı</span>
-                    </label>
-                    <select id="application-name" class="select2 form-select" name="applicationName" data-placeholder="Uygulama Seçin">
-                      <option value="Household">diasteknoloji.com</option>
-                      <option value="Household">gsm2.com</option>
-                    </select>
-                  </div>
-                  <div class="col">
-                    <label class="form-label" for="vulnerability-url">URL adresi</label>
+                <form action="/add_call" method="POST">
+                  <div class="mb-3">
                     <input
                             type="text"
                             class="form-control"
-                            id="vulnerability-url"
-                            placeholder="0123-4567"
-                            name="vulnerabilityUrl"
-                            aria-label="/users/add" />
+                            id="vulnerability-name"
+                            placeholder="Zafiyet başlığı"
+                            name="vulnerabilityTitle"
+                            aria-label="Zafiyet başlığı" />
                   </div>
-                </div>
-                <!-- Description -->
-                <div>
-                  <label class="form-label">Açıklama (POC)</label>
-                  <div class="form-control p-0 pt-1" >
-                    <div class="comment-toolbar border-0 border-bottom">
-                      <div class="comment-editor border-0 pb-4" id="vulnerability-description"></div>
-
+                  <div class="row mb-3">
+                    <div class="mb-3 col cybersecurity-select2-dropdown">
+                      <label
+                              class="form-label mb-1 d-flex justify-content-between align-items-center"
+                              for="application-name">
+                        <span>Uygulama Adı</span>
+                      </label>
+                      <select id="application-name" class="select2 form-select" name="applicationName" data-placeholder="Uygulama Seçin">
+                        <option value="diasteknoloji.com">diasteknoloji.com</option>
+                        <option value="gsm2.com">gsm2.com</option>
+                      </select>
+                    </div>
+                    <div class="col">
+                      <label class="form-label" for="vulnerability-url">URL adresi</label>
+                      <input
+                              type="text"
+                              class="form-control"
+                              id="vulnerability-url"
+                              placeholder="0123-4567"
+                              name="vulnerabilityUrl"
+                              aria-label="/users/add" />
                     </div>
                   </div>
-                </div>
+                  <!-- Description -->
+                  <div>
+                    <label class="form-label">Açıklama (POC)</label>
+                    <div class="form-control p-0 pt-1">
+                      <div class="comment-toolbar border-0 border-bottom">
+                        <div class="comment-editor border-0 pb-4" id="vulnerability-description"></div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
               </div>
             </div>
             <!-- /Vulnerability Information -->
@@ -141,9 +144,9 @@
                 <div class="mb-3 col cybersecurity-select2-dropdown">
                   <label class="form-label mb-1" for="vendor"> Şirket </label>
                   <select id="vendor" class="select2 form-select" name="vendor" data-placeholder="Şirket Seçin">
-                    <option value="">DİAS TEKNOLOJİ</option>
-                    <option value="men-clothing">ATLASTEK</option>
-                    <option value="women-clothing">GSM2</option>
+                    <option value="DIAS TEKNOLOJI">DİAS TEKNOLOJİ</option>
+                    <option value="ATLASTEK">ATLASTEK</option>
+                    <option value="GSM2">GSM2</option>
                   </select>
                 </div>
                 <!-- Application Category -->
@@ -155,31 +158,31 @@
                   </label>
                   <select id="application-category" class="select2 form-select" name="applicationCategory" data-placeholder="Uygulama Seçin">
                     <option value="">UTTS</option>
-                    <option value="Household">DBYS</option>
-                    <option value="Management">KMTS</option>
-                    <option value="Electronics">2M SARJ'</option>
+                    <option value="DBYS">DBYS</option>
+                    <option value="KMTS">KMTS</option>
+                    <option value="2M SARJ">2M SARJ'</option>
                   </select>
                 </div>
                 <!-- Vulnerability Category -->
                 <div class="mb-3 col cybersecurity-select2-dropdown">
                   <label class="form-label mb-1" for="vulnerability-category">Zafiyet Kategorisi</label>
                   <select id="vulnerability-category" class="select2 form-select" name="vulnerabilityCategory" data-placeholder="Zafiyet Kategorisi Seçin">
-                    <option value="">Web Uygulama</option>
-                    <option value="men-clothing">Mobil Uygulama</option>
-                    <option value="women-clothing">Web Servis</option>
-                    <option value="kid-clothing">Sunucu/Kaynak</option>
+                    <option value="WEB UYGULAMA">Web Uygulama</option>
+                    <option value="MOBIL UYGULAMA">Mobil Uygulama</option>
+                    <option value="WEB SERVIS">Web Servis</option>
+                    <option value="KAYNAK KOD">Sunucu/Kaynak</option>
                   </select>
                 </div>
                 <!-- Severity Level -->
                 <div class="mb-3 col cybersecurity-select2-dropdown">
                   <label class="form-label mb-1" for="severity-level">Zafiyet Seviyesi </label>
                   <select id="severity-level" class="select2 form-select" name="severityLevel" data-placeholder="Kritik/Yüksek">
-                    <option value="">Acil</option>
-                    <option value="Published">Kritik</option>
-                    <option value="Scheduled">Yüksek</option>
-                    <option value="Inactive">Orta </option>
-                    <option value="Inactive">Düşük</option>
-                    <option value="Inactive">Bilgi</option>
+                    <option value="ACIL">Acil</option>
+                    <option value="KRITIK">Kritik</option>
+                    <option value="YUKSEK">Yüksek</option>
+                    <option value="ORTA">Orta </option>
+                    <option value="DUSUK">Düşük</option>
+                    <option value="BILGI">Bilgi</option>
                   </select>
                 </div>
 
@@ -194,12 +197,7 @@
                 <!-- Tags -->
                 <div class="mb-3">
                   <label for="ecommerce-product-tags" class="form-label mb-1">Etiketler</label>
-                  <input
-                          id="ecommerce-product-tags"
-                          class="form-control"
-                          name="vulnerability-tags"
-                          value="Normal,Standard,Premium"
-                          aria-label="Zafiyet Etiketleri" />
+                  <input id="ecommerce-product-tags" class="form-control" name="vulnerability-tags" value="Normal,Standard,Premium" aria-label="Zafiyet Etiketleri" />
                 </div>
               </div>
             </div>
@@ -210,6 +208,10 @@
       </div>
     </div>
     <!--/ Content -->
+  </div>
+</div>
+
+<!--/ Content -->
 
     <script>
       document.getElementById('cvss-score').addEventListener('input', function() {
@@ -232,6 +234,44 @@
 
     <!-- UPLOAD FUNC & XSS CONTROL -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.4/purify.min.js"></script>
+
+<script>
+  document.getElementById("vulnerability-form").onsubmit = function(event) {
+    event.preventDefault(); // Varsayılan form gönderimini engelle
+
+    // FormData nesnesini oluştur
+    const formData = new FormData();
+
+    // Sayfadaki tüm input ve select elemanlarını toplamak
+    const elements = document.querySelectorAll(
+            'input[type="text"], input[type="number"], select, textarea'
+    );
+    elements.forEach(element => {
+      if (element.name) {
+        formData.append(element.name, element.value);
+      }
+    });
+
+    // Quill editöründeki description içeriğini formData'ya ekle
+    if (typeof quill !== 'undefined') {
+      var descriptionContent = DOMPurify.sanitize(quill.root.innerHTML);
+      formData.set('vulnerabilityDescription', descriptionContent);
+    }
+
+    // Form verilerini fetch ile sunucuya gönder
+    fetch("/add_call", {
+      method: 'POST',
+      body: formData
+    })
+            .then(response => response.text())
+            .then(data => {
+              console.log("Form başarıyla gönderildi:", data);
+              // Başarı durumunda yönlendirme veya mesaj ekleyebilirsiniz
+            })
+            .catch(error => console.error("Gönderim hatası:", error));
+  };
+</script>
+
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
@@ -298,21 +338,49 @@
           quill.insertText(range.index, placeholderText);
         }
 
-        document.getElementById("vulnerability-form").onsubmit = function() {
-          var descriptionContent = DOMPurify.sanitize(quill.root.innerHTML);
-          var descriptionInput = document.createElement('input');
-          descriptionInput.setAttribute('type', 'hidden');
-          descriptionInput.setAttribute('name', 'vulnerabilityDescription');
-          descriptionInput.setAttribute('value', descriptionContent);
-          this.appendChild(descriptionInput);
+        document.getElementById("vulnerability-form").onsubmit = function(event) {
+          event.preventDefault(); // Varsayılan form gönderimini engelle
+
+          // FormData nesnesini oluştur
+          const formData = new FormData();
+
+          // Sayfadaki tüm input, select ve textarea elemanlarını toplamak
+          const elements = document.querySelectorAll(
+                  'input[type="text"], input[type="number"], select, textarea'
+          );
+          elements.forEach(element => {
+            if (element.name) {
+              formData.append(element.name, element.value);
+            }
+          });
+
+          // Quill editöründeki description içeriğini formData'ya ekle
+          if (typeof quill !== 'undefined') {
+            var descriptionContent = DOMPurify.sanitize(quill.root.innerHTML);
+            formData.set('vulnerabilityDescription', descriptionContent);
+          }
+
+          // Form verilerini fetch ile sunucuya gönder
+          fetch("/add_call", {
+            method: 'POST',
+            body: formData
+          })
+                  .then(response => response.text())
+                  .then(data => {
+                    console.log("Form başarıyla gönderildi:", data);
+                    // Başarı durumunda yönlendirme veya mesaj ekleyebilirsiniz
+                  })
+                  .catch(error => console.error("Gönderim hatası:", error));
         };
       });
-
 
     </script>
 
 
+
+
     <script src="/static/assets/js/app-cybersecurity-vulnerability-add.js"></script>
+
 
     <!--/ Content -->
     {{ template "footer" . }}

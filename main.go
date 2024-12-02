@@ -35,6 +35,7 @@ func main() {
 	http.HandleFunc("/", controllers.AuthMiddleware(controllers.HomePage))
 	http.HandleFunc("/add_call", controllers.AuthMiddleware(controllers.AddCall))
 	http.HandleFunc("/profile", controllers.AuthMiddleware(controllers.Profile))
+	http.HandleFunc("/newcall", controllers.AuthMiddleware(controllers.NewCall))
 
 	log.Println("Sunucu başlatıldı: http://localhost:8080")
 	if err := http.ListenAndServe(":8080", nil); err != nil {
