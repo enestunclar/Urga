@@ -12,7 +12,6 @@
         <aside id="layout-menu" class="layout-menu-horizontal menu-horizontal menu bg-menu-theme flex-grow-0">
             <div class="container-xxl d-flex h-100">
                 <ul class="menu-inner py-1">
-                    <!-- Page -->
                     <li class="menu-item">
                         <a href="index.html" class="menu-link">
                             <i class="menu-icon tf-icons ti ti-smart-home"></i>
@@ -30,58 +29,220 @@
         </aside>
         <!-- / Menu -->
 
-
-        <!--/ Content -->
-
         <!-- Content -->
-
         <div class="container-xxl flex-grow-1 container-p-y">
-
             <!-- Form Alignment -->
             <div class="card">
                 <h5 class="card-header">Güvenlik Çağrısı Oluşturma</h5>
                 <div class="card-body">
-                    <div class="d-flex align-items-center justify-content-center h-px-500">
-                        <form class="w-px-500 border rounded p-3 p-md-5">
-                            <h3 class="mb-4">Sign In</h3>
-                            <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label" for="form-alignment-username">Username</label>
-                                <div class="col-sm-9">
-                                    <input type="text" id="form-alignment-username" class="form-control" placeholder="john.doe" />
-                                </div>
+                    <form>
+                        <!-- Talep Tipi ve Açıklama Bölümü (Yan Yana) -->
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label for="talep_tipi" class="form-label">Talep Tipi</label>
+                                <select class="form-select" id="talep_tipi" onchange="toggleSecurityTestFields()">
+                                    <option value="">Bir Talep Tipi Seçiniz</option>
+                                    <option value="güvenlik_testi">Güvenlik Testi</option>
+                                    <option value="diğer">Diğer</option>
+                                </select>
                             </div>
+                            <div class="col-md-8">
+                                <label for="aciklama" class="form-label">Açıklama</label>
+                                <textarea class="form-control" id="aciklama" rows="3"></textarea>
+                            </div>
+                        </div>
 
-                            <div class="row mb-3 form-password-toggle">
-                                <label class="col-sm-3 col-form-label" for="form-alignment-password">Password</label>
-                                <div class="col-sm-9">
-                                    <div class="input-group input-group-merge">
-                                        <input
-                                                type="password"
-                                                id="form-alignment-password"
-                                                class="form-control"
-                                                placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                                aria-describedby="form-alignment-password2" />
-                                        <span class="input-group-text cursor-pointer" id="form-alignment-password2"
-                                        ><i class="ti ti-eye-off"></i
-                                        ></span>
+                        <!-- Gönder Butonu Sağda -->
+                        <div class="text-end mt-3">
+                            <button type="submit" class="btn btn-primary">Gönder</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Güvenlik Testi Alanları, Formun Dışında Ayrı Bir Card Olarak -->
+            <div id="securityTestFields" style="display: none;">
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Güvenlik Testi Alanları</h5>
+
+                        <!-- Üst Satır: Servis, Uygulama ve Devreye Alım Tarihi -->
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="servis" class="form-label">Servis</label>
+                                <select class="form-select" id="servis">
+                                    <option value="">Bir Servis Seçiniz</option>
+                                    <option value="servis1">Servis 1</option>
+                                    <option value="servis2">Servis 2</option>
+                                    <option value="servis3">Servis 3</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="uygulama" class="form-label">Uygulama</label>
+                                <select class="form-select" id="uygulama">
+                                    <option value="">Bir Uygulama Seçiniz</option>
+                                    <option value="uygulama1">Uygulama 1</option>
+                                    <option value="uygulama2">Uygulama 2</option>
+                                    <option value="uygulama3">Uygulama 3</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="devreye_alim_tarihi" class="form-label">Devreye Alım Tarihi</label>
+                                <input type="date" class="form-control" id="devreye_alim_tarihi">
+                            </div>
+                        </div>
+
+                        <!-- Geliştirme Detayları ve Kapsam ikiye bölünecek -->
+                        <div class="row">
+                            <!-- Sol Taraf: Geliştirme Detayları -->
+                            <div class="col-md-6">
+                                <h5>Geliştirme Detayları</h5>
+
+                                <!-- Yeni Uygulama Test Ediliyor mu? -->
+                                <div class="mb-3">
+                                    <label class="form-label">Uygulama ilk defa mı test ediliyor (Yeni Uygulama)?</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="yeni_uygulama" id="yeni_uygulama_yes" value="Evet">
+                                        <label class="form-check-label" for="yeni_uygulama_yes">Evet</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="yeni_uygulama" id="yeni_uygulama_no" value="Hayır">
+                                        <label class="form-check-label" for="yeni_uygulama_no">Hayır</label>
+                                    </div>
+                                </div>
+
+                                <!-- Müşterilere Açık mı? -->
+                                <div class="mb-3">
+                                    <label class="form-label">Müşterilere Açık mı?</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="musterilere_acik" id="musterilere_acik_yes" value="Evet">
+                                        <label class="form-check-label" for="musterilere_acik_yes">Evet</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="musterilere_acik" id="musterilere_acik_no" value="Hayır">
+                                        <label class="form-check-label" for="musterilere_acik_no">Hayır</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="musterilere_acik" id="musterilere_acik_dias" value="Sadece DİAS çalışanları">
+                                        <label class="form-check-label" for="musterilere_acik_dias">Sadece DİAS çalışanları</label>
+                                    </div>
+                                </div>
+
+                                <!-- Hassas Veri Bulunuyor mu? -->
+                                <div class="mb-3">
+                                    <label class="form-label">Uygulamada Hassas/Gizli/Kritik veri bulunuyor mu? (TCKN, Kredi Kartı, KVKK Verileri)</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="hassas_veri" id="hassas_veri_yes" value="Evet">
+                                        <label class="form-check-label" for="hassas_veri_yes">Evet</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="hassas_veri" id="hassas_veri_no" value="Hayır">
+                                        <label class="form-check-label" for="hassas_veri_no">Hayır</label>
+                                    </div>
+                                </div>
+
+                                <!-- Dış Kaynak Firma Tarafından mı Geliştirildi? -->
+                                <div class="mb-3">
+                                    <label class="form-label">Uygulama Dış Kaynak bir firma tarafından mı geliştirildi?</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="dis_kaynak" id="dis_kaynak_yes" value="Evet">
+                                        <label class="form-check-label" for="dis_kaynak_yes">Evet</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="dis_kaynak" id="dis_kaynak_no" value="Hayır">
+                                        <label class="form-check-label" for="dis_kaynak_no">Hayır</label>
                                     </div>
                                 </div>
                             </div>
-                            <div class="mb-3">
-                                <label class="form-check m-0">
-                                    <input type="checkbox" class="form-check-input" />
-                                    <span class="form-check-label">Remember me</span>
-                                </label>
+
+                            <!-- Sağ Taraf: Kapsam -->
+                            <div class="col-md-6">
+                                <h5>Kapsam</h5>
+
+                                <!-- İnternete Açık mı? -->
+                                <div class="mb-3">
+                                    <label class="form-label">İnternete açık mı, ya da açılacak mı?</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="internete_acik" id="internete_acik_yes" value="Evet">
+                                        <label class="form-check-label" for="internete_acik_yes">Evet</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="internete_acik" id="internete_acik_no" value="Hayır">
+                                        <label class="form-check-label" for="internete_acik_no">Hayır</label>
+                                    </div>
+                                </div>
+
+                                <!-- Yeni Sunucu veya Değişiklik -->
+                                <div class="mb-3">
+                                    <label class="form-label">Yeni sunucu kuruldu mu, ya da sistem/ağ ile ilgili bir değişiklik yapıldı mı?</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="yeni_sunucu" id="yeni_sunucu_yes" value="Evet">
+                                        <label class="form-check-label" for="yeni_sunucu_yes">Evet</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="yeni_sunucu" id="yeni_sunucu_no" value="Hayır">
+                                        <label class="form-check-label" for="yeni_sunucu_no">Hayır</label>
+                                    </div>
+                                </div>
+
+                                <!-- Yeni Arayüz veya Web Servisi -->
+                                <div class="mb-3">
+                                    <label class="form-label">Yeni uygulama arayüzü geliştirildi mi?</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="uygulama_arayuzu" id="uygulama_arayuzu_yes" value="Evet">
+                                        <label class="form-check-label" for="uygulama_arayuzu_yes">Evet</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="uygulama_arayuzu" id="uygulama_arayuzu_no" value="Hayır">
+                                        <label class="form-check-label" for="uygulama_arayuzu_no">Hayır</label>
+                                    </div>
+                                </div>
+
+                                <!-- Yeni Webservisi veya Mobil Uygulama -->
+                                <div class="mb-3">
+                                    <label class="form-label">Yeni webservisi geliştirildi mi?</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="webservis" id="webservis_yes" value="Evet">
+                                        <label class="form-check-label" for="webservis_yes">Evet</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="webservis" id="webservis_no" value="Hayır">
+                                        <label class="form-check-label" for="webservis_no">Hayır</label>
+                                    </div>
+                                </div>
+
+                                <!-- Backend Geliştirmesi -->
+                                <div class="mb-3">
+                                    <label class="form-label">Sadece backend geliştirmesi mi?</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="sadece_backend" id="sadece_backend_yes" value="Evet">
+                                        <label class="form-check-label" for="sadece_backend_yes">Evet</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="sadece_backend" id="sadece_backend_no" value="Hayır">
+                                        <label class="form-check-label" for="sadece_backend_no">Hayır</label>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="d-grid">
-                                <button type="submit" class="btn btn-primary">Login</button>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!--/ Content -->
+        <!-- / Content -->
+    </div>
+</div>
 
+<script>
+    function toggleSecurityTestFields() {
+        var talepTipi = document.getElementById("talep_tipi").value;
+        var securityTestFields = document.getElementById("securityTestFields");
 
-{{ template "footer" . }}
+        if (talepTipi === "güvenlik_testi") {
+            securityTestFields.style.display = "block";
+        } else {
+            securityTestFields.style.display = "none";
+        }
+    }
+</script>
+

@@ -86,6 +86,8 @@ func AddCall(w http.ResponseWriter, r *http.Request) {
 			addedBy = "admin@admin.com" // Örnek kullanıcı adı
 		}
 
+		Status := "Açık"
+
 		// Form verilerini al
 		title := r.FormValue("vulnerabilityTitle")
 		url := r.FormValue("vulnerabilityUrl")
@@ -111,6 +113,7 @@ func AddCall(w http.ResponseWriter, r *http.Request) {
 			CvssScore:             cvssScore,
 			Tags:                  tags,
 			AddedBy:               addedBy, // Ekleyen kişi bilgisi
+			Status:                Status,
 		}
 
 		// Veritabanına kaydet
