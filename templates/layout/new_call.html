@@ -52,10 +52,7 @@
                             </div>
                         </div>
 
-                        <!-- Gönder Butonu Sağda -->
-                        <div class="text-end mt-3">
-                            <button type="submit" class="btn btn-primary">Gönder</button>
-                        </div>
+
                     </form>
                 </div>
             </div>
@@ -212,17 +209,23 @@
                                 </div>
 
                                 <!-- Backend Geliştirmesi -->
+                                <!-- Sadece Backend Geliştirmesi -->
                                 <div class="mb-3">
                                     <label class="form-label">Sadece backend geliştirmesi mi?</label>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="sadece_backend" id="sadece_backend_yes" value="Evet">
+                                        <input class="form-check-input" type="radio" name="sadece_backend" id="sadece_backend_yes" value="Evet" onchange="handleSadeceBackendChange()">
                                         <label class="form-check-label" for="sadece_backend_yes">Evet</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="sadece_backend" id="sadece_backend_no" value="Hayır">
+                                        <input class="form-check-input" type="radio" name="sadece_backend" id="sadece_backend_no" value="Hayır" onchange="handleSadeceBackendChange()">
                                         <label class="form-check-label" for="sadece_backend_no">Hayır</label>
                                     </div>
                                 </div>
+
+                            </div>
+                            <!-- Gönder Butonu Sağda -->
+                            <div class="text-end mt-3">
+                                <button type="submit" class="btn btn-primary">Gönder</button>
                             </div>
                         </div>
                     </div>
@@ -244,5 +247,88 @@
             securityTestFields.style.display = "none";
         }
     }
+</script>
+
+<script>
+    function handleSadeceBackendChange() {
+        var sadeceBackendYes = document.getElementById("sadece_backend_yes");
+        var sadeceBackendNo = document.getElementById("sadece_backend_no");
+
+        // Kapsamda diğer tüm seçenekler
+        var interneteAcikYes = document.getElementById("internete_acik_yes");
+        var interneteAcikNo = document.getElementById("internete_acik_no");
+
+        var yeniSunucuYes = document.getElementById("yeni_sunucu_yes");
+        var yeniSunucuNo = document.getElementById("yeni_sunucu_no");
+
+        var uygulamaArayuzuYes = document.getElementById("uygulama_arayuzu_yes");
+        var uygulamaArayuzuNo = document.getElementById("uygulama_arayuzu_no");
+
+        var webservisYes = document.getElementById("webservis_yes");
+        var webservisNo = document.getElementById("webservis_no");
+
+        var submitButton = document.querySelector('button[type="submit"]');
+
+        // "Sadece Backend Evet" seçildiğinde
+        if (sadeceBackendYes.checked) {
+            // Diğer tüm seçenekleri "Hayır" yapıyoruz
+            interneteAcikNo.checked = true;
+            yeniSunucuNo.checked = true;
+            uygulamaArayuzuNo.checked = true;
+            webservisNo.checked = true;
+
+            // Butonu aktif hale getir
+            submitButton.disabled = false;
+        }
+        // "Sadece Backend Hayır" seçildiğinde
+        else if (sadeceBackendNo.checked) {
+            // Eğer herhangi bir seçenek Evet yapılırsa, "Sadece Backend" otomatik olarak Hayır olacak
+            if (interneteAcikYes.checked || yeniSunucuYes.checked || uygulamaArayuzuYes.checked || webservisYes.checked) {
+                // Diğer seçeneklerden bir tanesi Evet yapılmışsa, "Sadece Backend" Hayır olacak
+                sadeceBackendNo.checked = true;
+            }
+
+            // Eğer hiçbir seçenek Evet yapılmazsa, "Sadece Backend" Hayır olacak
+            submitButton.disabled = false;
+        }
+        // Diğer durumda buton devre dışı kalacak
+        else {
+            submitButton.disabled = true;
+        }
+    }
+
+    // Diğer seçenekler değiştirildiğinde "Sadece Backend" seçimlerini kontrol et
+    function checkIfSadeceBackendNeedsChange() {
+        var sadeceBackendYes = document.getElementById("sadece_backend_yes");
+        var sadeceBackendNo = document.getElementById("sadece_backend_no");
+
+        var interneteAcikYes = document.getElementById("internete_acik_yes");
+        var yeniSunucuYes = document.getElementById("yeni_sunucu_yes");
+        var uygulamaArayuzuYes = document.getElementById("uygulama_arayuzu_yes");
+        var webservisYes = document.getElementById("webservis_yes");
+
+        // Eğer herhangi bir seçenek Evet yapılırsa, "Sadece Backend Hayır" seçeneği yapılacak
+        if (interneteAcikYes.checked || yeniSunucuYes.checked || uygulamaArayuzuYes.checked || webservisYes.checked) {
+            if (sadeceBackendYes.checked) {
+                sadeceBackendNo.checked = true;  // "Sadece Backend" Hayır olacak
+            }
+        } else {
+            if (sadeceBackendNo.checked) {
+                sadeceBackendYes.checked = true;  // "Sadece Backend" Evet olacak
+            }
+        }
+    }
+
+    // Sayfa yüklendiğinde buton devre dışı olacak
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelector('button[type="submit"]').disabled = true;
+
+        // Diğer seçeneklerde değişiklik olduğunda kontrol et
+        var allRadios = document.querySelectorAll('input[type="radio"]');
+        allRadios.forEach(function(radio) {
+            radio.addEventListener('change', checkIfSadeceBackendNeedsChange);
+        });
+    });
+
 </script>
 
